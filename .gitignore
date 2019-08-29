@@ -1,3 +1,4 @@
 *~
 store.sqlite3
 *.etag
+*.etag.last
