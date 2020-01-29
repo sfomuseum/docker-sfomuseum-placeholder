@@ -1,4 +1,5 @@
 *~
-store.sqlite3
+*.sqlite3
+*.gz*
 *.etag
 *.etag.last

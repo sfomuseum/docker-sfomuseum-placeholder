@@ -1,6 +1,10 @@
 docker:
 	docker build -t placeholder .
 
+# curl -s -I https://data.geocode.earth/placeholder/store.sqlite3.gz | grep etag
+# curl -s -I https://data.geocode.earth/placeholder/store.sqlite3.gz | grep etag > store.sqlite3.gz.etag 
+# curl -s -o store.sqlite3.gz https://data.geocode.earth/placeholder/store.sqlite3.gz
+
 data:
 	sh ./utils/fetch-data.sh
 

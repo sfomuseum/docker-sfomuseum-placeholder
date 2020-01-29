@@ -1,6 +1,6 @@
 #!/bin/env
 
-REMOTE_SOURCE="https://s3.amazonaws.com/pelias-data.nextzen.org/placeholder/store.sqlite3.gz"
+REMOTE_SOURCE="https://data.geocode.earth/placeholder/store.sqlite3.gz"
 
 LOCAL_SOURCE=`basename ${REMOTE_SOURCE}`
 LOCAL_SOURCE_UNCOMPRESSED=`echo ${LOCAL_SOURCE} | sed -e 's/.gz//'`
@@ -15,8 +15,11 @@ then
     if [ -f ${LAST_ETAG} ]
     then
 	LAST_ETAG_VALUE=`cat ${LAST_ETAG}`
-	CURRENT_ETAG_VALUE=`curl -s -I ${REMOTE_SOURCE} | grep ETag`
+	CURRENT_ETAG_VALUE=`curl -s -I ${REMOTE_SOURCE} | grep etag | sed 's/\w+$//g'`
 
+	# this test seems to fail for reasons I don't understand
+	# (20200129/thisisaaronland)
+	
 	if [ "${LAST_ETAG_VALUE}" = "${CURRENT_ETAG_VALUE}" ]
 	then
 	    echo "No changes to the data. Nothing to fetch."
