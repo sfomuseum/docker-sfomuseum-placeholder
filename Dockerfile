@@ -39,7 +39,7 @@ RUN apt-get update && apt-get dist-upgrade -y \
     && npm install \
     && mkdir -p /usr/local/pelias/placeholder/data
 
-    # Setup supervisord stuff
+# Setup supervisord stuff
 
 RUN mkdir -p /etc/supervisord.d
 RUN mkdir -p /var/log/placeholder/
@@ -65,16 +65,17 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 [include] \n\
 files = /etc/supervisord.d/*.conf' >> /etc/supervisord.conf
 
+# stdout_logfile=/var/log/placeholder/stdout.log \n\
+# stdout_logfile_maxbytes=0MB \n\ 
+# stderr_logfile=/var/log/placeholder/stderr.log \n\
+# stderr_logfile_maxbytes=10MB \n\
+
 RUN echo '[placeholder] \n\
 nodaemon=true \n\
 [program:placeholder] \n\
 command=/usr/bin/npm start --prefix /usr/local/pelias/placeholder \n\
 autostart=true \n\
 autorestart=true \n\
-stdout_logfile=/var/log/placeholder/stdout.log \n\
-stdout_logfile_maxbytes=0MB \n\ 
-stderr_logfile=/var/log/placeholder/stderr.log \n\
-stderr_logfile_maxbytes=10MB \n\
 exitcodes=0 ' >> /etc/supervisord.d/placeholder.conf
 
 RUN echo '[placeholder-www] \n\
@@ -89,6 +90,6 @@ stderr_logfile=/dev/fd/2 \n\
 redirect_stderr=true \n\
 exitcodes=0 ' >> /etc/supervisord.d/placeholder-www.conf
 
-# COPY store.sqlite3 /usr/local/pelias/placeholder/data/
+COPY store.sqlite3 /usr/local/pelias/placeholder/data/
 
-# ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
+ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]

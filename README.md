@@ -1,8 +1,12 @@
-# docker-placeholder
+# docker-sfomuseum-placeholder
 
 This is SFO Museum's Dockerfile for running the (Pelias) Placeholder service.
 
 This creates a container image with the [Placeholder](https://github.com/pelias/placeholder/) software and the SQLite database it uses stored locally (to the container). That means it creates a container image that is _very very_ big. This may not be the container image you want to use. We may not use it, in time.
+
+The container also contains a running instance of the [go-placeholder-client-www](https://github.com/sfomuseum/go-placeholder-client-www) server tool.
+
+Both services are managed using the `supervisord` tool.
 
 ## Fetching the data
 
@@ -13,30 +17,47 @@ You can either fetch the data yourself from https://s3.amazonaws.com/pelias-data
 Just run the following:
 
 ```
-docker build -t placeholder .
+$> docker build -t placeholder .
 ```
 
 This assumes you've already fetched the data (see above) and it is stored in the same directory as the `Dockerfile`. I guess we could move the fetching of the data in the `Dockerfile` itself. That's not what we do, today.
 
 ## Running
 
+Because the Placeholder service takes between 30-60 seconds to start up the `go-placeholder-client-www` application has its own internal "ready-check" to determine whether the Placeholder endpoint is accepting connections. While the Placeholder service is starting up the `go-placeholder-client-www` application will accept connections but its search functionality is disabled.
+
 ### Locally
 
 ```
-> make start
-docker run -it -p 3000:3000 placeholder npm start --prefix /usr/local/pelias/placeholder
+$> docker run -it -p 8080:8080 -e PLACEHOLDER_NEXTZEN_APIKEY=**** placeholder
 
-> pelias-placeholder@0.0.0-development start /usr/local/pelias/placeholder
-> ./cmd/server.sh
+2021-05-21 20:00:01,086 INFO Included extra file "/etc/supervisord.d/placeholder-www.conf" during parsing
+2021-05-21 20:00:01,086 INFO Included extra file "/etc/supervisord.d/placeholder.conf" during parsing
+2021-05-21 20:00:01,099 INFO RPC interface 'supervisor' initialized
+2021-05-21 20:00:01,099 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2021-05-21 20:00:01,100 INFO supervisord started with pid 1
+2021-05-21 20:00:02,110 INFO spawned: 'placeholder' with pid 9
+2021-05-21 20:00:02,118 INFO spawned: 'placeholder-www' with pid 10
+2021/05/21 20:00:02 Listening on http://0.0.0.0:8080
+2021-05-21 20:00:03,610 INFO success: placeholder entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-05-21 20:00:03,610 INFO success: placeholder-www entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021/05/21 20:00:04 Check Placeholder status (http://localhost:3000)
+2021/05/21 20:00:04 Failed to determine Placeholder status, Get "http://localhost:3000": dial tcp 127.0.0.1:3000: connect: connection refused
+2021/05/21 20:00:06 Check Placeholder status (http://localhost:3000)
+2021/05/21 20:00:06 Failed to determine Placeholder status, Get "http://localhost:3000": dial tcp 127.0.0.1:3000: connect: connection refused
+2021/05/21 20:00:08 Check Placeholder status (http://localhost:3000)
 
-2019-08-26T18:38:06.718Z - info: [placeholder] [master] using 2 cpus
-2019-08-26T18:38:06.761Z - info: [placeholder] [master] worker forked 24
-2019-08-26T18:38:06.763Z - info: [placeholder] [master] worker forked 25
-2019-08-26T18:38:07.515Z - info: [placeholder] [worker 24] listening on 0.0.0.0:3000
-2019-08-26T18:38:07.515Z - info: [placeholder] [worker 25] listening on 0.0.0.0:3000
+...
+
+2021/05/21 20:01:18 Failed to determine Placeholder status, Get "http://localhost:3000": dial tcp 127.0.0.1:3000: connect: connection refused
+2021/05/21 20:01:20 Check Placeholder status (http://localhost:3000)
+2021/05/21 20:01:20 Placeholder appears to running and accepting connections
 ```
 
 ## See also
 
 * https://geocode.earth/blog/2019/almost-one-line-coarse-geocoding
+* https://millsfield.sfomuseum.org/blog/tags/placeholder
 * https://github.com/pelias/placeholder/
+* https://github.com/sfomuseum/go-placeholder-client-www
+* https://github.com/sfomuseum/go-placeholder-client
