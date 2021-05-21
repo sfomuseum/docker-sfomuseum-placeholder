@@ -90,6 +90,6 @@ stderr_logfile=/dev/fd/2 \n\
 redirect_stderr=true \n\
 exitcodes=0 ' >> /etc/supervisord.d/placeholder-www.conf
 
-COPY store.sqlite3 /usr/local/pelias/placeholder/data/
+COPY data/store.sqlite3 /usr/local/pelias/placeholder/data/
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]

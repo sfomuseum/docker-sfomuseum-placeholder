@@ -6,10 +6,7 @@ docker-nocache:
 
 # curl -s -I https://data.geocode.earth/placeholder/store.sqlite3.gz | grep etag
 # curl -s -I https://data.geocode.earth/placeholder/store.sqlite3.gz | grep etag > store.sqlite3.gz.etag 
-# curl -s -o store.sqlite3.gz https://data.geocode.earth/placeholder/store.sqlite3.gz
-
-data:
-	sh ./utils/fetch-data.sh
+# curl -s -o data/store.sqlite3.gz https://data.geocode.earth/placeholder/store.sqlite3.gz
 
 start:
 	docker run -it -p 8080:8080 placeholder
