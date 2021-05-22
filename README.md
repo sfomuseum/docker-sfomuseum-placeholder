@@ -10,7 +10,10 @@ Both services are managed using the `supervisord` tool.
 
 ## Fetching the data
 
-You can either fetch the data yourself from https://s3.amazonaws.com/pelias-data.nextzen.org/placeholder/store.sqlite3.gz or util the handy `make data` target in the Makefile (which in turn runs the [utils/fetch-data.sh](utils/fetch-data.sh) script.
+```
+$> curl -s -o data/store.sqlite3.gz https://data.geocode.earth/placeholder/store.sqlite3.gz
+$> bunzip2 data/store.sqlite3.gz
+```
 
 ## Building
 
