@@ -12,7 +12,7 @@ Both services are managed using the `supervisord` tool.
 
 ```
 $> curl -s -o data/store.sqlite3.gz https://data.geocode.earth/placeholder/store.sqlite3.gz
-$> bunzip2 data/store.sqlite3.gz
+$> gunzip data/store.sqlite3.gz
 ```
 
 ## Building
