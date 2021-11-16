@@ -8,8 +8,8 @@ RUN apt-get update && apt-get dist-upgrade -y \
 
     # Install Go from source
     
-    && wget https://golang.org/dl/go1.16.7.linux-amd64.tar.gz \
-    && tar -xvzf go1.16.7.linux-amd64.tar.gz \
+    && wget https://golang.org/dl/go1.17.3.linux-amd64.tar.gz \
+    && tar -xvzf go1.17.3.linux-amd64.tar.gz \
     # && mv go /usr/local \
     # && ln -s /usr/local/go/bin/* /usr/local/bin/ \
     # && cd - \
