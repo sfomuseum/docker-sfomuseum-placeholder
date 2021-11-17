@@ -11,18 +11,7 @@ class EcsGoPlaceholderStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps){
         super(scope, id, props);
 
-        const vpc = new ec2.Vpc(this, 'vpc', { 
-            cidr: '10.0.0.0/16',
-            maxAzs: 2,
-            natGateways: 0,
-            subnetConfiguration: [
-            {
-                name: 'public-subnet-1',
-                subnetType: ec2.SubnetType.PUBLIC,
-                cidrMask: 24,
-              },
-            ]
-        });
+        const vpc = new ec2.Vpc(this, 'vpc', {});
 
         const cluster = new ecs.Cluster(this, 'Cluster', { vpc });
 
