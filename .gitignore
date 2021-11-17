@@ -3,3 +3,6 @@
 *.gz*
 *.etag
 *.etag.last
+.env
+node_modules/
+cdk.out/
