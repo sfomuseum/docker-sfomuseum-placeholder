@@ -77,6 +77,10 @@ To deploy this way, do the following:
 4. Wait - it will take some time to do its thing
 5. You should end up with a DNS name for the Elastic Load Balancer where you can find your web app
 
+To tear it all down you can do:
+
+    $ cdk destroy
+
 ## See also
 
 * https://geocode.earth/blog/2019/almost-one-line-coarse-geocoding
