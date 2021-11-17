@@ -68,10 +68,10 @@ To deploy this way, do the following:
 3. Follow these commands below
 
 ```
-    $ npm install -g aws-cdk
-    $ npm install
-    $ cdk bootstrap
-    $ cdk deploy
+$ npm install -g aws-cdk
+$ npm install
+$ cdk bootstrap
+$ cdk deploy
 ```
 
 4. Wait - it will take some time to do its thing
