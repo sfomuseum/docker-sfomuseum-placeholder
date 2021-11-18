@@ -57,6 +57,32 @@ $> docker run -it -p 8080:8080 -e PLACEHOLDER_NEXTZEN_APIKEY=**** placeholder
 2021/05/21 20:01:20 Placeholder appears to running and accepting connections
 ```
 
+## Deploy to AWS with the CDK
+
+This project is setup to easily deploy and configure everything using AWS Elastic Container Service via the Cloud Development Kit (CDK). The end result is a working web application sitting behind an Elastic Load Balancer and running on EC2 Instances. (NOTE - We are using ECS with EC2 for now due to a limitation with Fargate having to do with networking.)
+
+This project will use your existing VPC to deploy your ECS application. Please see the notes in [index.ts](index.ts) around Default VPCs and set the VPC_ID environment variable before deployment.
+
+To deploy this way, do the following:
+
+1. Edit your .env file with appropriate values
+2. Configure your local environment with your AWS credentials
+3. Follow these commands below
+
+```
+$ npm install -g aws-cdk
+$ npm install
+$ cdk bootstrap
+$ cdk deploy
+```
+
+4. Wait - it will take some time to do its thing
+5. You should end up with a DNS name for the Elastic Load Balancer where you can find your web app
+
+To tear it all down you can do:
+
+    $ cdk destroy
+
 ## See also
 
 * https://geocode.earth/blog/2019/almost-one-line-coarse-geocoding

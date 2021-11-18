@@ -3,3 +3,8 @@
 *.gz*
 *.etag
 *.etag.last
+.env
+node_modules/
+cdk.out/
+cdk.context.json
+.DS_Store
