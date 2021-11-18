@@ -61,6 +61,8 @@ $> docker run -it -p 8080:8080 -e PLACEHOLDER_NEXTZEN_APIKEY=**** placeholder
 
 This project is setup to easily deploy and configure everything using AWS Elastic Container Service via the Cloud Development Kit (CDK). The end result is a working web application sitting behind an Elastic Load Balancer and running on EC2 Instances. (NOTE - We are using ECS with EC2 for now due to a limitation with Fargate having to do with networking.)
 
+This project will use your existing VPC to deploy your ECS application. Please see the notes in [index.ts](index.ts) around Default VPCs and set the VPC_ID environment variable before deployment.
+
 To deploy this way, do the following:
 
 1. Edit your .env file with appropriate values

@@ -6,24 +6,18 @@ import { config } from "dotenv";
 config();
 
 var nextzen = process.env.PLACEHOLDER_NEXTZEN_APIKEY || "123456";
+var vpcID = process.env.VPC_ID || "123456";
 
 class EcsGoPlaceholderStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps){
         super(scope, id, props);
 
-        // This VPC uses public subnets with a free Internet Gateway. 
-        // You might opt for a private subnet approach using a NAT Gateway, but that has an additional cost.
-        const vpc = new ec2.Vpc(this, 'vpc', {
-            maxAzs: 2,
-            natGateways: 0,
-            subnetConfiguration: [
-              {
-                name: 'Public',
-                subnetType: ec2.SubnetType.PUBLIC,
-                cidrMask: 24,
-              },
-            ],
-        });
+        // This looks up your existing VPC by ID provided in the .env file.
+        // Be sure to check if your existing VPC is a "Default VPC" or not and adjust the parameter below.
+        const vpc = ec2.Vpc.fromLookup(this, 'vpc', {
+            isDefault: true,
+            vpcId: vpcID
+        })
 
         const cluster = new ecs.Cluster(this, 'Cluster', { vpc });
 
