@@ -92,6 +92,4 @@ exitcodes=0 ' >> /etc/supervisord.d/placeholder-www.conf
 
 COPY data/store.sqlite3 /usr/local/pelias/placeholder/data/
 
-EXPOSE 8080
-
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]

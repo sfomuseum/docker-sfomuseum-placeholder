@@ -59,7 +59,7 @@ $> docker run -it -p 8080:8080 -e PLACEHOLDER_NEXTZEN_APIKEY=**** placeholder
 
 ## Deploy to AWS with the CDK
 
-This project is setup to easily deploy and configure everything using AWS Elastic Container Service via the Cloud Development Kit (CDK). The end result is a working web application sitting behind an Elastic Load Balancer and running on Fargate.
+This project is setup to easily deploy and configure everything using AWS Elastic Container Service via the Cloud Development Kit (CDK). The end result is a working web application sitting behind an Elastic Load Balancer and running on EC2 Instances. (NOTE - We are using ECS with EC2 for now due to a limitation with Fargate having to do with networking.)
 
 To deploy this way, do the following:
 
