@@ -34,14 +34,11 @@ class EcsGoPlaceholderStack extends cdk.Stack {
 	var ec2Env = {
                     DEPLOYED_DATE: Date.now().toLocaleString(),
                     PLACEHOLDER_NEXTZEN_APIKEY: nextzenApiKey,
-	}
+		   PLACEHOLDER_STATIC_PREFIX:placeholderStaticPrefix,		    
+	};
 
 	// To do: assign any/all process.env.PLACEHOLDER_ variables
-	
-	if (placeholderStaticPrefix != "") {
-	   ec2Env["PLACEHOLDER_STATIC_PREFIX"] = placeholderStaticPrefix;
-	}
-	
+		
         const ec2Service = new ecs_patterns.ApplicationLoadBalancedEc2Service(this, "EC2Service", {
             cluster,
             // here is where you can adjust the memory limit for each task
