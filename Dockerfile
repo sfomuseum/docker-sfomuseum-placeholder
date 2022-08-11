@@ -1,15 +1,15 @@
 FROM ubuntu:latest
 
 RUN apt-get update && apt-get dist-upgrade -y \
-    && apt-get install -y gcc g++ make git curl sqlite3 wget supervisor \
+    && apt-get install -y gcc g++ make git curl sqlite3 wget supervisor nodejs npm \
 
     && mkdir /build \
     && cd /build \
 
     # Install Go from source
     
-    && wget https://golang.org/dl/go1.17.3.linux-amd64.tar.gz \
-    && tar -xvzf go1.17.3.linux-amd64.tar.gz \
+    && wget https://golang.org/dl/go1.19.linux-amd64.tar.gz \
+    && tar -xvzf go1.19.linux-amd64.tar.gz \
     # && mv go /usr/local \
     # && ln -s /usr/local/go/bin/* /usr/local/bin/ \
     # && cd - \
@@ -24,11 +24,6 @@ RUN apt-get update && apt-get dist-upgrade -y \
     # Clean up
     
     && rm -rf /build \
-
-    # Install node from source
-    
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-    && apt-get install -y nodejs \
 
     # Install Placeholder
     
