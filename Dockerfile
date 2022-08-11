@@ -76,7 +76,7 @@ exitcodes=0 ' >> /etc/supervisord.d/placeholder.conf
 RUN echo '[placeholder-www] \n\
 nodaemon=true \n\
 [program:placeholder-www] \n\
-command=/usr/local/bin/placeholder-www -server-uri http://0.0.0.0:8080 -nextzen-apikey xxxxxx -api\n\
+command=/usr/local/bin/placeholder-www -server-uri http://0.0.0.0:8080 -nextzen-apikey xxxxxx -api -prefix /places\n\
 autorestart=unexpected \n\
 stdout_logfile=/dev/fd/1 \n\
 stdout_logfile_maxbytes=0MB \n\
