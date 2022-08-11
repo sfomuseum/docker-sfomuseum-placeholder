@@ -1,0 +1,5 @@
+#!/bin/sh
+# This exists because it's easier than trying to understand whatever magic
+# systemd hoohah I need to start in a given directory
+cd /usr/local/pelias/placeholder
+./cmd/server.sh

@@ -68,7 +68,7 @@ files = /etc/supervisord.d/*.conf' >> /etc/supervisord.conf
 RUN echo '[placeholder] \n\
 nodaemon=true \n\
 [program:placeholder] \n\
-command=/usr/bin/npm start --prefix /usr/local/pelias/placeholder \n\
+command=/usr/local/bin/placeholder\n\
 autostart=true \n\
 autorestart=true \n\
 exitcodes=0 ' >> /etc/supervisord.d/placeholder.conf
@@ -86,5 +86,6 @@ redirect_stderr=true \n\
 exitcodes=0 ' >> /etc/supervisord.d/placeholder-www.conf
 
 COPY data/store.sqlite3 /usr/local/pelias/placeholder/data/
+COPY bin/placeholder /usr/local/bin/placeholder
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
