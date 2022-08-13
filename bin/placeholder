@@ -1,5 +1,10 @@
 #!/bin/sh
-# This exists because it's easier than trying to understand whatever magic
-# systemd hoohah I need to start in a given directory
-cd /usr/local/pelias/placeholder
+
+curl https://data.geocode.earth/placeholder/store.sqlite3.gz | gunzip > /data/placeholder/store.sqlite3
+
+ls -al /data/placeholder/
+
+/usr/local/bin/placeholder-www -server-uri http://0.0.0.0:8080 -nextzen-apikey xxxxxx -api -prefix /places -ready-check-ttl 120 &
+
+cd /code/pelias/placeholder/
 ./cmd/server.sh
