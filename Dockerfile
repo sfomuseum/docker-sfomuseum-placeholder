@@ -1,3 +1,4 @@
+# https://github.com/pelias/docker-baseimage/blob/master/Dockerfile
 FROM pelias/baseimage
 
 # downloader apt dependencies
@@ -13,11 +14,15 @@ RUN mkdir -p /usr/local/src && cd /usr/local/src \
     && ln -s /usr/local/go/bin/* /usr/local/bin/ \
     && cd / && rm -rf /usr/local/src
 
+# Install go-placeholder-client-www
+
 RUN mkdir -p /build \
     && git clone https://github.com/sfomuseum/go-placeholder-client-www.git /build/go-placeholder-client-www \
     && cd /build/go-placeholder-client-www \
     && /usr/local/bin/go build -mod vendor -o /usr/local/bin/placeholder-www cmd/server/main.go \
     && cd / && rm -rf /build
+
+# Install placeholder
 
 RUN mkdir -p /code/pelias/
 
