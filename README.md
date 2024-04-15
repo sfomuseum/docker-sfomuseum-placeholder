@@ -8,6 +8,10 @@ The container also contains a running instance of the [go-placeholder-client-www
 
 Both services are managed using the `supervisord` tool.
 
+## Deprecation Notice
+
+As of April 2024, this code has been deprecated. You should have a look at the `sfomuseum` branch of the [sfomuseum/placeholder](https://github.com/sfomuseum/placeholder/) package instead.
+
 ## Fetching the data
 
 ```
